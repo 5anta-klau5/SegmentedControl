@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @property (weak, nonatomic) IBOutlet UIView *viewFirst;
 @property (weak, nonatomic) IBOutlet UIView *viewSecond;
+@property (weak, nonatomic) IBOutlet UIView *viewThird;
 
 - (IBAction)segmentIndexChanged:(UISegmentedControl *)sender;
 

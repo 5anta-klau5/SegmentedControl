@@ -17,8 +17,15 @@
     // Drawing code
 }
 */
-
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [[[NSBundle mainBundle] loadNibNamed:@"StopwatchView" owner:self options:nil] objectAtIndex:0];
+    if (self) {
+        self.frame = frame;
+    }
+    return self;
+}
 - (IBAction)pushStartStopBtn:(id)sender {
+    self.watchTimeText.text = @"Start";
     NSLog(@"start button pressed");
 }
 

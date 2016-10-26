@@ -7,9 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StopwatchView">
             <connections>
-                <outlet property="pushResetCircleBtn" destination="xIU-uU-kvn" id="3hX-bJ-XhM"/>
-                <outlet property="resetCircleButton" destination="xIU-uU-kvn" id="m3F-Ym-8zs"/>
-                <outlet property="startStopButton" destination="z7f-yX-nVF" id="A9K-BI-ft8"/>
+                <outlet property="resetCircleBtn" destination="xIU-uU-kvn" id="4mv-FR-3hX"/>
+                <outlet property="startStopBtn" destination="z7f-yX-nVF" id="Ub1-3m-ep5"/>
                 <outlet property="watchTimeText" destination="7zZ-2S-xOZ" id="3RR-K4-Vd9"/>
             </connections>
         </placeholder>
@@ -31,11 +30,11 @@
                         <action selector="pushStartStopBtn:" destination="-1" eventType="touchUpInside" id="gSC-Zi-VVE"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIU-uU-kvn">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIU-uU-kvn" userLabel="Reset Circle Button">
                     <rect key="frame" x="275" y="183" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                     <connections>
-                        <action selector="pushResetCircleBtn:" destination="-1" eventType="touchUpInside" id="79W-vS-e7m"/>
+                        <action selector="pushResetCircleBtn:" destination="-1" eventType="touchUpInside" id="GBd-oG-hVT"/>
                     </connections>
                 </button>
             </subviews>

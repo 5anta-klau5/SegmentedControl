@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "StopwatchView.h"
 
 @interface ViewController ()
 
@@ -19,6 +20,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.textLabel.text = @"First selected";
+    StopwatchView* stopwatchView = [[StopwatchView alloc] initWithFrame:CGRectMake(0, 0, self.viewThird.bounds.size.width, self.viewThird.bounds.size.height)];
+    [self.viewThird addSubview:stopwatchView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,11 +35,20 @@
             self.textLabel.text = @"First segment selected";
             self.viewFirst.hidden = NO;
             self.viewSecond.hidden = YES;
+            self.viewThird.hidden = YES;
             break;
         case 1:
             self.textLabel.text = @"Second segment selected";
             self.viewFirst.hidden = YES;
             self.viewSecond.hidden = NO;
+            self.viewThird.hidden = YES;
+            break;
+        case 2:
+            self.textLabel.text = @"Third segment selected";
+            self.viewFirst.hidden = YES;
+            self.viewSecond.hidden = YES;
+            self.viewThird.hidden = NO;
+            break;
         default:
             break;
     }
