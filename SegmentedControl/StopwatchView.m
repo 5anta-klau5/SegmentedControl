@@ -18,18 +18,20 @@
 }
 */
 - (instancetype)initWithFrame:(CGRect)frame {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"StopwatchView" owner:self options:nil] objectAtIndex:0];
+    self = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil] objectAtIndex:0];
     if (self) {
         self.frame = frame;
     }
     return self;
 }
+
 - (IBAction)pushStartStopBtn:(id)sender {
     self.watchTimeText.text = @"Start";
-    NSLog(@"start button pressed");
+//    NSLog(@"start button pressed");
 }
 
 - (IBAction)pushResetCircleBtn:(id)sender {
-    NSLog(@"reset button pressed");
+    self.watchTimeText.text = @"Reset";
+//    NSLog(@"reset button pressed");
 }
 @end
