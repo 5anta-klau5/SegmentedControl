@@ -8,8 +8,6 @@
 
 #import "StopwatchView.h"
 
-@implementation StopwatchView
-
 typedef enum: NSUInteger {
     StopwatchStateReady,
     StopwatchStateStart,
@@ -20,7 +18,16 @@ typedef enum: NSUInteger {
     StopwatchStateReset
 } StopwatchStateType;
 
-StopwatchStateType currentWatchState = StopwatchStateReady;
+@interface StopwatchView ()
+{
+    
+    StopwatchStateType _currentWatchState;
+}
+@end
+
+@implementation StopwatchView
+
+
 double startTime;
 double beforeStopTime = 0.0;
 double beforeStopCircleTime = 0.0;
@@ -35,13 +42,15 @@ double lastCircleTime = 0.0;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        _currentWatchState = StopwatchStateReady;
     }
     return self;
 }
 
 - (IBAction)pushStartStopBtn:(id)sender {
-    NSLog(@"ResetCircleBtn pressed %@",self);
-    switch (currentWatchState) {
+    NSLog(@"pushStartStopBtn before pressed %@  %i",self, _currentWatchState);
+
+    switch (_currentWatchState) {
         case StopwatchStateReady:
             [self setStopwatchState:StopwatchStateStart];
             break;
@@ -54,6 +63,7 @@ double lastCircleTime = 0.0;
         default:
             break;
     }
+    NSLog(@"pushStartStopBtn after pressed %@  %i",self, _currentWatchState);
 //    if (currentWatchState == StopwatchStateReady | currentWatchState == StopwatchStatePaused) {
 //        [self setStopwatchState:StopwatchStateStart];
 //    } else if (currentWatchState == StopwatchStateStarted) {
@@ -62,7 +72,8 @@ double lastCircleTime = 0.0;
 }
 
 - (IBAction)pushResetCircleBtn:(id)sender {
-    switch (currentWatchState) {
+    NSLog(@"pushResetCircleBtn before pressed %@  %i",self, _currentWatchState);
+    switch (_currentWatchState) {
         case StopwatchStateStarted:
             [self setStopwatchState:StopwatchStateCircle];
             break;
@@ -72,6 +83,7 @@ double lastCircleTime = 0.0;
         default:
             break;
     }
+    NSLog(@"pushResetCircleBtn after pressed %@  %i",self, _currentWatchState);
 //    if (currentWatchState == StopwatchStateStarted) {
 //        [self setStopwatchState:StopwatchStateCircle];
 //    } else if (currentWatchState == StopwatchStatePaused) {
@@ -81,14 +93,14 @@ double lastCircleTime = 0.0;
 
 - (void)setStopwatchState:(StopwatchStateType)state {
     if (state == StopwatchStateStart) {
-        currentWatchState = StopwatchStateStarted;
+        _currentWatchState = StopwatchStateStarted;
         [self startTimer];
     } else if (state == StopwatchStatePause) {
         double stopTime = [NSDate timeIntervalSinceReferenceDate];
         beforeStopTime += stopTime - startTime;
         beforeStopCircleTime += stopTime - lastCircleTime;
         [self stopTimer];
-        currentWatchState = StopwatchStatePaused;
+        _currentWatchState = StopwatchStatePaused;
     } else if (state == StopwatchStateCircle) {
 //        [circleList addObject:self.circleTimeText.text];
         lastCircleTime = [NSDate timeIntervalSinceReferenceDate];
@@ -101,7 +113,7 @@ double lastCircleTime = 0.0;
         beforeStopCircleTime = 0.0;
         lastCircleTime = 0.0;
 //        [circleList removeAllObjects];
-        currentWatchState = StopwatchStateReady;
+        _currentWatchState = StopwatchStateReady;
         [self.watchTimeText setText:@"00:00.00"];
 //        [self.circleTimeText setText:@"00:00.00"];
 //        [self.circleTable reloadData];
@@ -190,7 +202,7 @@ double lastCircleTime = 0.0;
 }
 
 - (void)ticTac {
-    if (currentWatchState == StopwatchStateStarted) {
+    if (_currentWatchState == StopwatchStateStarted) {
         double currentTime = [NSDate timeIntervalSinceReferenceDate];
         double totalSeconds = currentTime - startTime + beforeStopTime;
         
