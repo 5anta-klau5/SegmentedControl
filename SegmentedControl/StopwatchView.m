@@ -33,14 +33,14 @@ double lastCircleTime = 0.0;
 }
 */
 - (instancetype)initWithFrame:(CGRect)frame {
-    self = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil] objectAtIndex:0];
+    self = [super initWithFrame:frame];
     if (self) {
-        self.frame = frame;
     }
     return self;
 }
 
 - (IBAction)pushStartStopBtn:(id)sender {
+    NSLog(@"ResetCircleBtn pressed %@",self);
     switch (currentWatchState) {
         case StopwatchStateReady:
             [self setStopwatchState:StopwatchStateStart];
@@ -62,7 +62,6 @@ double lastCircleTime = 0.0;
 }
 
 - (IBAction)pushResetCircleBtn:(id)sender {
-    NSLog(@"ResetCircleBtn pressed");
     switch (currentWatchState) {
         case StopwatchStateStarted:
             [self setStopwatchState:StopwatchStateCircle];
