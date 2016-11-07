@@ -26,7 +26,7 @@
     [self.viewThird addSubview:stopwatchView];
     
     stopwatchView = [[[NSBundle mainBundle] loadNibNamed:@"StopwatchView" owner:nil options:nil] objectAtIndex:0];
-    stopwatchView.frame = CGRectMake(0, 0, self.viewThird.bounds.size.width, self.viewThird.bounds.size.height);
+    stopwatchView.frame = CGRectMake(0, 0, self.viewSecond.bounds.size.width, self.viewSecond.bounds.size.height);
     [self.viewSecond addSubview:stopwatchView];
 }
 

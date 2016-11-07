@@ -22,16 +22,23 @@ typedef enum: NSUInteger {
 {
     
     StopwatchStateType _currentWatchState;
+    NSMutableArray *circleList;
+    
+    double _startTime;
+    double _beforeStopTime;
+    double _beforeStopCircleTime;
+    double _lastCircleTime;
 }
 @end
 
 @implementation StopwatchView
 
+//double startTime;
+//double _beforeStopTime = 0.0;
+//double _beforeStopCircleTime = 0.0;
+//double _lastCircleTime = 0.0;
+//NSMutableArray *circleList = nil;
 
-double startTime;
-double beforeStopTime = 0.0;
-double beforeStopCircleTime = 0.0;
-double lastCircleTime = 0.0;
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -48,7 +55,7 @@ double lastCircleTime = 0.0;
 }
 
 - (IBAction)pushStartStopBtn:(id)sender {
-    NSLog(@"pushStartStopBtn before pressed %@  %i",self, _currentWatchState);
+    NSLog(@"pushStartStopBtn before pressed %@  %lu",self, (unsigned long)_currentWatchState);
 
     switch (_currentWatchState) {
         case StopwatchStateReady:
@@ -63,7 +70,7 @@ double lastCircleTime = 0.0;
         default:
             break;
     }
-    NSLog(@"pushStartStopBtn after pressed %@  %i",self, _currentWatchState);
+    NSLog(@"pushStartStopBtn after pressed %@  %lu",self, (unsigned long)_currentWatchState);
 //    if (currentWatchState == StopwatchStateReady | currentWatchState == StopwatchStatePaused) {
 //        [self setStopwatchState:StopwatchStateStart];
 //    } else if (currentWatchState == StopwatchStateStarted) {
@@ -72,7 +79,7 @@ double lastCircleTime = 0.0;
 }
 
 - (IBAction)pushResetCircleBtn:(id)sender {
-    NSLog(@"pushResetCircleBtn before pressed %@  %i",self, _currentWatchState);
+    NSLog(@"pushResetCircleBtn before pressed %@  %lu",self, (unsigned long)_currentWatchState);
     switch (_currentWatchState) {
         case StopwatchStateStarted:
             [self setStopwatchState:StopwatchStateCircle];
@@ -83,7 +90,7 @@ double lastCircleTime = 0.0;
         default:
             break;
     }
-    NSLog(@"pushResetCircleBtn after pressed %@  %i",self, _currentWatchState);
+    NSLog(@"pushResetCircleBtn after pressed %@  %lu",self, (unsigned long)_currentWatchState);
 //    if (currentWatchState == StopwatchStateStarted) {
 //        [self setStopwatchState:StopwatchStateCircle];
 //    } else if (currentWatchState == StopwatchStatePaused) {
@@ -97,25 +104,29 @@ double lastCircleTime = 0.0;
         [self startTimer];
     } else if (state == StopwatchStatePause) {
         double stopTime = [NSDate timeIntervalSinceReferenceDate];
-        beforeStopTime += stopTime - startTime;
-        beforeStopCircleTime += stopTime - lastCircleTime;
+        _beforeStopTime += stopTime - _startTime;
+        _beforeStopCircleTime += stopTime - _lastCircleTime;
         [self stopTimer];
         _currentWatchState = StopwatchStatePaused;
     } else if (state == StopwatchStateCircle) {
-//        [circleList addObject:self.circleTimeText.text];
-        lastCircleTime = [NSDate timeIntervalSinceReferenceDate];
-        beforeStopCircleTime = 0.0;
+        if (!circleList) {
+            circleList = [[NSMutableArray alloc] init];
+        }
+        [circleList addObject:self.circleTimeText.text];
+        NSLog(@"%@", circleList);
+        _lastCircleTime = [NSDate timeIntervalSinceReferenceDate];
+        _beforeStopCircleTime = 0.0;
 //        [self.circleTable reloadData];
     } else if (state == StopwatchStateReset) {
         [self stopTimer];
-        startTime = 0.0;
-        beforeStopTime = 0.0;
-        beforeStopCircleTime = 0.0;
-        lastCircleTime = 0.0;
-//        [circleList removeAllObjects];
+        _startTime = 0.0;
+        _beforeStopTime = 0.0;
+        _beforeStopCircleTime = 0.0;
+        _lastCircleTime = 0.0;
+        [circleList removeAllObjects];
         _currentWatchState = StopwatchStateReady;
         [self.watchTimeText setText:@"00:00.00"];
-//        [self.circleTimeText setText:@"00:00.00"];
+        [self.circleTimeText setText:@"00:00.00"];
 //        [self.circleTable reloadData];
     }
     [self changeButtonsForState:state];
@@ -184,8 +195,8 @@ double lastCircleTime = 0.0;
 }
 
 - (void)startTimer {
-    startTime = [NSDate timeIntervalSinceReferenceDate];
-    lastCircleTime = startTime;
+    _startTime = [NSDate timeIntervalSinceReferenceDate];
+    _lastCircleTime = _startTime;
     self.myTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
                                                     target:self
                                                   selector:@selector(ticTac)
@@ -204,15 +215,15 @@ double lastCircleTime = 0.0;
 - (void)ticTac {
     if (_currentWatchState == StopwatchStateStarted) {
         double currentTime = [NSDate timeIntervalSinceReferenceDate];
-        double totalSeconds = currentTime - startTime + beforeStopTime;
+        double totalSeconds = currentTime - _startTime + _beforeStopTime;
         
-        double circleTime = currentTime - lastCircleTime + beforeStopCircleTime;
+        double circleTime = currentTime - _lastCircleTime + _beforeStopCircleTime;
         
         NSString *timeText = [self createTimeFromSeconds:totalSeconds];
         [self.watchTimeText setText:timeText];
         
         NSString *circleTimeText = [self createTimeFromSeconds:circleTime];
-//        [self.circleTimeText setText:circleTimeText];
+        [self.circleTimeText setText:circleTimeText];
         
     }
 }

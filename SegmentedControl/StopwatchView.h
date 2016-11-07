@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) NSTimer *myTimer;
 @property (weak, nonatomic) IBOutlet UILabel *watchTimeText;
+@property (weak, nonatomic) IBOutlet UILabel *circleTimeText;
 @property (weak, nonatomic) IBOutlet UIButton *startStopBtn;
 @property (weak, nonatomic) IBOutlet UIButton *resetCircleBtn;
 
