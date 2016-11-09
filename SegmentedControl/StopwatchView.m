@@ -7,6 +7,7 @@
 //
 
 #import "StopwatchView.h"
+#import "CircleCell.h"
 
 typedef enum: NSUInteger {
     StopwatchStateReady,
@@ -46,16 +47,39 @@ typedef enum: NSUInteger {
     // Drawing code
 }
 */
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+//- (id)init {
+//    self = [super init];
+//    if (self) {
+//        _currentWatchState = StopwatchStateReady;
+//        _beforeStopTime = 0.0;
+//        _beforeStopCircleTime = 0.0;
+//        circleList = [[NSMutableArray alloc] init];
+//    }
+//    return self;
+//}
+//
+//- (instancetype)initWithFrame:(CGRect)frame {
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        _currentWatchState = StopwatchStateReady;
+//    }
+//    return self;
+//}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    self = [super initWithCoder:decoder];
     if (self) {
         _currentWatchState = StopwatchStateReady;
+        _beforeStopTime = 0.0;
+        _beforeStopCircleTime = 0.0;
+        circleList = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (IBAction)pushStartStopBtn:(id)sender {
-    NSLog(@"pushStartStopBtn before pressed %@  %lu",self, (unsigned long)_currentWatchState);
+//    NSLog(@"pushStartStopBtn before pressed %@  %lu",self, (unsigned long)_currentWatchState);
+//    NSLog(@"%lu", (unsigned long)_currentWatchState);
 
     switch (_currentWatchState) {
         case StopwatchStateReady:
@@ -70,7 +94,7 @@ typedef enum: NSUInteger {
         default:
             break;
     }
-    NSLog(@"pushStartStopBtn after pressed %@  %lu",self, (unsigned long)_currentWatchState);
+//    NSLog(@"pushStartStopBtn after pressed %@  %lu",self, (unsigned long)_currentWatchState);
 //    if (currentWatchState == StopwatchStateReady | currentWatchState == StopwatchStatePaused) {
 //        [self setStopwatchState:StopwatchStateStart];
 //    } else if (currentWatchState == StopwatchStateStarted) {
@@ -79,7 +103,7 @@ typedef enum: NSUInteger {
 }
 
 - (IBAction)pushResetCircleBtn:(id)sender {
-    NSLog(@"pushResetCircleBtn before pressed %@  %lu",self, (unsigned long)_currentWatchState);
+//    NSLog(@"pushResetCircleBtn before pressed %@  %lu",self, (unsigned long)_currentWatchState);
     switch (_currentWatchState) {
         case StopwatchStateStarted:
             [self setStopwatchState:StopwatchStateCircle];
@@ -90,7 +114,7 @@ typedef enum: NSUInteger {
         default:
             break;
     }
-    NSLog(@"pushResetCircleBtn after pressed %@  %lu",self, (unsigned long)_currentWatchState);
+//    NSLog(@"pushResetCircleBtn after pressed %@  %lu",self, (unsigned long)_currentWatchState);
 //    if (currentWatchState == StopwatchStateStarted) {
 //        [self setStopwatchState:StopwatchStateCircle];
 //    } else if (currentWatchState == StopwatchStatePaused) {
@@ -109,14 +133,14 @@ typedef enum: NSUInteger {
         [self stopTimer];
         _currentWatchState = StopwatchStatePaused;
     } else if (state == StopwatchStateCircle) {
-        if (!circleList) {
-            circleList = [[NSMutableArray alloc] init];
-        }
+//        if (!circleList) {
+//            circleList = [[NSMutableArray alloc] init];
+//        }
         [circleList addObject:self.circleTimeText.text];
-        NSLog(@"%@", circleList);
+//        NSLog(@"%@", circleList);
         _lastCircleTime = [NSDate timeIntervalSinceReferenceDate];
         _beforeStopCircleTime = 0.0;
-//        [self.circleTable reloadData];
+        [self.circleTable reloadData];
     } else if (state == StopwatchStateReset) {
         [self stopTimer];
         _startTime = 0.0;
@@ -127,7 +151,7 @@ typedef enum: NSUInteger {
         _currentWatchState = StopwatchStateReady;
         [self.watchTimeText setText:@"00:00.00"];
         [self.circleTimeText setText:@"00:00.00"];
-//        [self.circleTable reloadData];
+        [self.circleTable reloadData];
     }
     [self changeButtonsForState:state];
 }
@@ -246,4 +270,33 @@ typedef enum: NSUInteger {
     
     return timeText;
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [circleList count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"circleTimeCell"];
+//    if (!cell) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"circleTimeCell"];
+//    }
+//
+//    cell.textLabel.text = [circleList objectAtIndex:indexPath.row];
+    long itemsCount = [circleList count];
+    long currentRow = indexPath.row;
+    
+    CircleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"circleTimeCell"];
+    if (!cell) {
+        [tableView registerNib:[UINib nibWithNibName:@"CircleCell" bundle:nil] forCellReuseIdentifier:@"circleTimeCell"];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"circleTimeCell"];
+    }
+    cell.circleTimeTxt.text = [circleList objectAtIndex:itemsCount - currentRow - 1];
+    cell.circleNmbrTxt.text = [NSString stringWithFormat:@"Circle %ld", itemsCount - currentRow];
+    return cell;
+}
+
 @end

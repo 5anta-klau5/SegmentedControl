@@ -51,14 +51,25 @@
                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HVO-wH-JfJ">
+                    <rect key="frame" x="0.0" y="284" width="375" height="383"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="N5Q-OM-bic"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="6u0-re-Gdf"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
+                <outlet property="circleTable" destination="HVO-wH-JfJ" id="WWr-pU-KjE"/>
                 <outlet property="circleTimeText" destination="0HE-f9-eVF" id="25c-Sm-o2M"/>
                 <outlet property="resetCircleBtn" destination="jSO-Dj-YUy" id="B8E-tQ-qvS"/>
                 <outlet property="startStopBtn" destination="Hft-gT-tDx" id="1c3-vt-CXI"/>
                 <outlet property="watchTimeText" destination="8zV-6T-V5x" id="qn6-tq-sD6"/>
             </connections>
+            <point key="canvasLocation" x="22.5" y="35.5"/>
         </view>
     </objects>
 </document>
