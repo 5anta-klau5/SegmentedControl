@@ -15,6 +15,8 @@
 		AF88D38B1DBFDE4600AC7BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF88D3891DBFDE4600AC7BF3 /* LaunchScreen.storyboard */; };
 		AF88D3941DBFEF2A00AC7BF3 /* StopwatchView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF88D3931DBFEF2A00AC7BF3 /* StopwatchView.m */; };
 		AF88D3981DBFF99400AC7BF3 /* StopwatchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF88D3971DBFF99400AC7BF3 /* StopwatchView.xib */; };
+		AFF873681DDBAF9F004C6E74 /* TimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF873671DDBAF9F004C6E74 /* TimerView.m */; };
+		AFF8736A1DDBAFDF004C6E74 /* TimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFF873691DDBAFDF004C6E74 /* TimerView.xib */; };
 		AFFC95941DD3B9A80039C71F /* CircleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFFC95931DD3B9A80039C71F /* CircleCell.xib */; };
 		AFFE69D01DD2755300C782B7 /* CircleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFFE69CF1DD2755300C782B7 /* CircleCell.m */; };
 /* End PBXBuildFile section */
@@ -33,6 +35,9 @@
 		AF88D3921DBFEF2A00AC7BF3 /* StopwatchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopwatchView.h; sourceTree = "<group>"; };
 		AF88D3931DBFEF2A00AC7BF3 /* StopwatchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopwatchView.m; sourceTree = "<group>"; };
 		AF88D3971DBFF99400AC7BF3 /* StopwatchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopwatchView.xib; sourceTree = "<group>"; };
+		AFF873661DDBAF9F004C6E74 /* TimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerView.h; sourceTree = "<group>"; };
+		AFF873671DDBAF9F004C6E74 /* TimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerView.m; sourceTree = "<group>"; };
+		AFF873691DDBAFDF004C6E74 /* TimerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimerView.xib; sourceTree = "<group>"; };
 		AFFC95931DD3B9A80039C71F /* CircleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleCell.xib; sourceTree = "<group>"; };
 		AFFE69CE1DD2755300C782B7 /* CircleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleCell.h; sourceTree = "<group>"; };
 		AFFE69CF1DD2755300C782B7 /* CircleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleCell.m; sourceTree = "<group>"; };
@@ -74,9 +79,12 @@
 				AF88D3821DBFDE4600AC7BF3 /* ViewController.m */,
 				AF88D3921DBFEF2A00AC7BF3 /* StopwatchView.h */,
 				AF88D3931DBFEF2A00AC7BF3 /* StopwatchView.m */,
+				AF88D3971DBFF99400AC7BF3 /* StopwatchView.xib */,
+				AFF873661DDBAF9F004C6E74 /* TimerView.h */,
+				AFF873671DDBAF9F004C6E74 /* TimerView.m */,
+				AFF873691DDBAFDF004C6E74 /* TimerView.xib */,
 				AFFE69CE1DD2755300C782B7 /* CircleCell.h */,
 				AFFE69CF1DD2755300C782B7 /* CircleCell.m */,
-				AF88D3971DBFF99400AC7BF3 /* StopwatchView.xib */,
 				AFFC95931DD3B9A80039C71F /* CircleCell.xib */,
 				AF88D3841DBFDE4600AC7BF3 /* Main.storyboard */,
 				AF88D3871DBFDE4600AC7BF3 /* Assets.xcassets */,
@@ -156,6 +164,7 @@
 				AF88D3881DBFDE4600AC7BF3 /* Assets.xcassets in Resources */,
 				AFFC95941DD3B9A80039C71F /* CircleCell.xib in Resources */,
 				AF88D3981DBFF99400AC7BF3 /* StopwatchView.xib in Resources */,
+				AFF8736A1DDBAFDF004C6E74 /* TimerView.xib in Resources */,
 				AF88D3861DBFDE4600AC7BF3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF873681DDBAF9F004C6E74 /* TimerView.m in Sources */,
 				AFFE69D01DD2755300C782B7 /* CircleCell.m in Sources */,
 				AF88D3831DBFDE4600AC7BF3 /* ViewController.m in Sources */,
 				AF88D3801DBFDE4600AC7BF3 /* AppDelegate.m in Sources */,

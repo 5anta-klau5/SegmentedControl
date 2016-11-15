@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "StopwatchView.h"
+#import "TimerView.h"
 
 @interface ViewController ()
 
@@ -22,12 +23,16 @@
     self.textLabel.text = @"First selected";
     
     StopwatchView* stopwatchView = [[[NSBundle mainBundle] loadNibNamed:@"StopwatchView" owner:nil options:nil] objectAtIndex:0];
-    stopwatchView.frame = CGRectMake(0, 0, self.viewThird.bounds.size.width, self.viewThird.bounds.size.height);
-    [self.viewThird addSubview:stopwatchView];
-    
-    stopwatchView = [[[NSBundle mainBundle] loadNibNamed:@"StopwatchView" owner:nil options:nil] objectAtIndex:0];
     stopwatchView.frame = CGRectMake(0, 0, self.viewSecond.bounds.size.width, self.viewSecond.bounds.size.height);
     [self.viewSecond addSubview:stopwatchView];
+    
+//    stopwatchView = [[[NSBundle mainBundle] loadNibNamed:@"StopwatchView" owner:nil options:nil] objectAtIndex:0];
+//    stopwatchView.frame = CGRectMake(0, 0, self.viewThird.bounds.size.width, self.viewThird.bounds.size.height);
+//    [self.viewThird addSubview:stopwatchView];
+    
+    TimerView* timerView = [[[NSBundle mainBundle] loadNibNamed:@"TimerView" owner:nil options:nil] objectAtIndex:0];
+    timerView.frame = CGRectMake(0, 0, self.viewThird.bounds.size.width, self.viewThird.bounds.size.height);
+    [self.viewThird addSubview:timerView];
 }
 
 - (void)didReceiveMemoryWarning {
