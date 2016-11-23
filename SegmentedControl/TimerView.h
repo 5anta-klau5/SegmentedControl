@@ -12,8 +12,11 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *selectedTime;
 @property (weak, nonatomic) IBOutlet UIDatePicker *myDatePicker;
-@property (weak, nonatomic) IBOutlet UIButton *someBtn;
+@property (weak, nonatomic) IBOutlet UIButton *startPauseBtn;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 
 - (IBAction)datePickerChanged:(UIDatePicker *)datePicker;
+- (IBAction)pushedStartPauseBtn:(UIButton *)sender;
+- (IBAction)pushedCancelBtn:(UIButton *)sender;
 
 @end

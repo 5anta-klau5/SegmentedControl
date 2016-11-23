@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface StopwatchView : UIView <UITableViewDelegate, UITableViewDataSource>{
-    NSTimer *myTimer;
+//    NSTimer *myTimer;
 }
 
 @property (strong, nonatomic) NSTimer *myTimer;
