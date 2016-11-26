@@ -38,30 +38,17 @@ typedef enum: NSUInteger {
 }
 */
 
-
-- (id)initWithCoder:(NSCoder *)decoder {
-    NSLog(@"timerView loading");
-    self = [super initWithCoder:decoder];
-    if (self) {
-        _currentCountdownState = CountdownStateReady;
-        _elapsedTime = 0;
-        
-//        [self.myDatePicker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventTouchDown];
-//        [self.someBtn addTarget:self action:@selector(someBtnPressed) forControlEvents:UIControlEventTouchDown];
-        
-        self.myDatePicker.countDownDuration = 120.0f;
-        self.selectedTime.text = [NSString stringWithFormat:@"%f", self.myDatePicker.countDownDuration];
-        NSLog(@"duration: %f, text: %@", self.myDatePicker.countDownDuration, self.selectedTime.text);
-        if (self.myDatePicker) {
-            NSLog(@"datepicker is here");
-        } else {
-            NSLog(@"datepicker is NO here");
-        }
-    }
-    return self;
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    _currentCountdownState = CountdownStateReady;
+    _elapsedTime = 0;
+    
+//    self.myDatePicker.countDownDuration = 120.0f;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.myDatePicker.countDownDuration = 120.0f ;
+    });
 }
-
-
 
 - (IBAction)datePickerChanged:(UIDatePicker *)datePicker {
     NSLog(@"datePicker changed");
