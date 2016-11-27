@@ -14,13 +14,15 @@ typedef enum: NSUInteger {
     CountdownStateStarted,
     CountdownStatePause,
     CountdownStatePaused,
+    CountdownStateResume,
+    CountdownStateResumed,
     CountdownStateCancel
 } CountdownStateType;
 
 @interface TimerView() {
     int _remainder;
-    int _afterRemainder;
-    int _elapsedTime;
+    double _secondsLeft;
+//    double _elapsedTime;
     NSTimeInterval _countDownInterval;
     NSTimer *_myTimer;
     CountdownStateType _currentCountdownState;
@@ -42,7 +44,7 @@ typedef enum: NSUInteger {
     [super awakeFromNib];
     
     _currentCountdownState = CountdownStateReady;
-    _elapsedTime = 0;
+//    _elapsedTime = 0;
     
 //    self.myDatePicker.countDownDuration = 120.0f;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -61,19 +63,20 @@ typedef enum: NSUInteger {
 }
 
 - (IBAction)pushedStartPauseBtn:(UIButton *)sender {
-
     switch (_currentCountdownState) {
         case CountdownStateReady:
             [self setCountDownState:CountdownStateStart];
             break;
-        case CountdownStateStarted: {
+        case CountdownStateStarted:
             [self setCountDownState:CountdownStatePause];
             break;
-        }
-        case CountdownStatePaused: {
-            [self setCountDownState:CountdownStateStart];
+        case CountdownStatePaused:
+            NSLog(@"resume");
+            [self setCountDownState:CountdownStateResume];
             break;
-        }
+        case CountdownStateResumed:
+            [self setCountDownState:CountdownStatePause];
+            break;
         default:
             break;
     }
@@ -91,9 +94,11 @@ typedef enum: NSUInteger {
             _currentCountdownState = CountdownStateStarted;
             _countDownInterval = (NSTimeInterval)_myDatePicker.countDownDuration;
             _remainder = _countDownInterval;
-            _afterRemainder = _countDownInterval - _remainder%60 - _elapsedTime;
-            NSLog(@"interval: %f, rem: %i, remainder: %i", _countDownInterval, _remainder, _remainder%60);
-            [self updateCountDown];
+//            _secondsLeft = _countDownInterval - _remainder%60 - _elapsedTime;
+//            NSLog(@"interval: %f, rem: %i, remainder: %i", _countDownInterval, _remainder, _remainder%60);
+            _secondsLeft = _countDownInterval;
+//            [self updateCountDown];
+            self.selectedTime.text = [self createTimeFromSeconds:_secondsLeft];
             [self startTimer];
             self.myDatePicker.hidden = YES;
             self.selectedTime.hidden = NO;
@@ -102,12 +107,16 @@ typedef enum: NSUInteger {
         case CountdownStatePause: {
             [self stopTimer];
             _currentCountdownState = CountdownStatePaused;
-            NSLog(@"%i", _elapsedTime);
+            break;
+        }
+        case CountdownStateResume: {
+            _currentCountdownState = CountdownStateResumed;
+            [self startTimer];
             break;
         }
         case CountdownStateCancel: {
             [self stopTimer];
-            _elapsedTime = 0;
+//            _elapsedTime = 0;
             self.selectedTime.hidden = YES;
             self.myDatePicker.hidden = NO;
             _currentCountdownState = CountdownStateReady;
@@ -130,6 +139,10 @@ typedef enum: NSUInteger {
         case CountdownStatePause:
             [self.startPauseBtn setTitle:NSLocalizedString(@"Resume", nil) forState:UIControlStateNormal];
             [self.startPauseBtn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+            break;
+        case CountdownStateResume:
+            [self.startPauseBtn setTitle:NSLocalizedString(@"Pause", nil) forState:UIControlStateNormal];
+            [self.startPauseBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             break;
         case CountdownStateCancel:
             [self.startPauseBtn setTitle:NSLocalizedString(@"Start", nil) forState:UIControlStateNormal];
@@ -158,46 +171,30 @@ typedef enum: NSUInteger {
 
 - (void)stopTimer {
     if ([_myTimer isValid]) {
-//        NSLog(@"stopTimer");
         [_myTimer invalidate];
     }
     _myTimer = nil;
-//    NSLog(@"%@", _myTimer);
 }
 
 - (void)updateCountDown {
-    _elapsedTime++;
-    self.selectedTime.text = [self createTimeFromSeconds:_afterRemainder];
-    _afterRemainder --;
-//    NSLog(@"%d", _afterRemainder);
-    if (_afterRemainder == -1) {
+//    _elapsedTime++;
+    _secondsLeft --;
+//        NSLog(@"seconds left: %f", _secondsLeft);
+    self.selectedTime.text = [self createTimeFromSeconds:_secondsLeft];
+    if (_secondsLeft == 0) {
         [self setCountDownState:CountdownStateCancel];
         NSLog(@"time is up");
     }
 }
 
-- (NSString *)createTimeFromSeconds:(int)seconds {
-    int hours = (int)seconds / 3600;
-    int minutes = (int)(seconds - hours*3600)/60;
-    int extraSeconds = seconds%60;
-    
-    NSString *sec = [NSString stringWithFormat:@"%i", extraSeconds];
-    if (extraSeconds < 10) {
-        sec = [NSString stringWithFormat:@"0%i", extraSeconds];
-    }
-    
-    NSString *min = [NSString stringWithFormat:@"%i", minutes];
-    if (minutes < 10) {
-        min = [NSString stringWithFormat:@"0%i", minutes];
-    }
-    
-    NSString *hour = [NSString stringWithFormat:@"%i", hours];
-    if (hours < 10) {
-        hour = [NSString stringWithFormat:@"0%i", hours];
-    }
-    
-    NSString *timeText = [NSString stringWithFormat:@"%@:%@:%@", hour, min, sec];
-    
+- (NSString *)createTimeFromSeconds:(double)seconds {
+    double hours, minutes, extraSeconds;
+    hours = seconds / 3600;
+    minutes = fmod(seconds, 3600) / 60;
+    extraSeconds = fmod(fmod(seconds, 3600), 60);
+
+    NSString *timeText = [NSString stringWithFormat:@"%02d:%02d:%02d", (int)hours, (int)minutes, (int)extraSeconds];
+
     return timeText;
 }
 
