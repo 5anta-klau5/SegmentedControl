@@ -20,11 +20,13 @@ typedef enum: NSUInteger {
 } CountdownStateType;
 
 @interface TimerView() {
-    int _remainder;
+//    int _remainder;
     double _secondsLeft;
 //    double _elapsedTime;
     NSTimeInterval _countDownInterval;
     NSTimer *_myTimer;
+    NSDate *_lastFireDateOfTimer;
+    NSDate *_pauseStartDate;
     CountdownStateType _currentCountdownState;
 }
 
@@ -71,7 +73,6 @@ typedef enum: NSUInteger {
             [self setCountDownState:CountdownStatePause];
             break;
         case CountdownStatePaused:
-            NSLog(@"resume");
             [self setCountDownState:CountdownStateResume];
             break;
         case CountdownStateResumed:
@@ -93,7 +94,7 @@ typedef enum: NSUInteger {
         case CountdownStateStart: {
             _currentCountdownState = CountdownStateStarted;
             _countDownInterval = (NSTimeInterval)_myDatePicker.countDownDuration;
-            _remainder = _countDownInterval;
+//            _remainder = _countDownInterval;
 //            _secondsLeft = _countDownInterval - _remainder%60 - _elapsedTime;
 //            NSLog(@"interval: %f, rem: %i, remainder: %i", _countDownInterval, _remainder, _remainder%60);
             _secondsLeft = _countDownInterval;
@@ -105,13 +106,22 @@ typedef enum: NSUInteger {
             break;
         }
         case CountdownStatePause: {
-            [self stopTimer];
             _currentCountdownState = CountdownStatePaused;
+            _lastFireDateOfTimer = [_myTimer fireDate];
+            _pauseStartDate = [NSDate date];
+            float diff = [_lastFireDateOfTimer timeIntervalSinceDate:_pauseStartDate];
+            NSLog(@"difference: %f", diff);
+//            [self stopTimer];
+            [_myTimer setFireDate:[NSDate distantFuture]];
             break;
         }
         case CountdownStateResume: {
             _currentCountdownState = CountdownStateResumed;
-            [self startTimer];
+//            [self startTimer];
+            NSDate *resumeDate = [NSDate date];
+            float pauseTime = [resumeDate timeIntervalSinceDate:_pauseStartDate];
+            NSDate *nextFireDateOfTimer = [NSDate dateWithTimeInterval:pauseTime sinceDate:_lastFireDateOfTimer];
+            [_myTimer setFireDate:nextFireDateOfTimer];
             break;
         }
         case CountdownStateCancel: {
