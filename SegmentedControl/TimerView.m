@@ -7,6 +7,7 @@
 //
 
 #import "TimerView.h"
+#import "Utils.h"
 
 typedef enum: NSUInteger {
     CountdownStateReady,
@@ -99,7 +100,8 @@ typedef enum: NSUInteger {
 //            NSLog(@"interval: %f, rem: %i, remainder: %i", _countDownInterval, _remainder, _remainder%60);
             _secondsLeft = _countDownInterval;
 //            [self updateCountDown];
-            self.selectedTime.text = [self createTimeFromSeconds:_secondsLeft];
+//            self.selectedTime.text = [self createTimeFromSeconds:_secondsLeft];
+            self.selectedTime.text = [Utils createTimeFromSeconds:_secondsLeft withFormat:TimeFormat_iHour_iMin_iSec];
             [self startTimer];
             self.myDatePicker.hidden = YES;
             self.selectedTime.hidden = NO;
@@ -190,22 +192,23 @@ typedef enum: NSUInteger {
 //    _elapsedTime++;
     _secondsLeft --;
 //        NSLog(@"seconds left: %f", _secondsLeft);
-    self.selectedTime.text = [self createTimeFromSeconds:_secondsLeft];
+//        self.selectedTime.text = [self createTimeFromSeconds:_secondsLeft];
+    self.selectedTime.text = [Utils createTimeFromSeconds:_secondsLeft withFormat:TimeFormat_iHour_iMin_iSec];
     if (_secondsLeft == 0) {
         [self setCountDownState:CountdownStateCancel];
         NSLog(@"time is up");
     }
 }
 
-- (NSString *)createTimeFromSeconds:(double)seconds {
-    double hours, minutes, extraSeconds;
-    hours = seconds / 3600;
-    minutes = fmod(seconds, 3600) / 60;
-    extraSeconds = fmod(fmod(seconds, 3600), 60);
-
-    NSString *timeText = [NSString stringWithFormat:@"%02d:%02d:%02d", (int)hours, (int)minutes, (int)extraSeconds];
-
-    return timeText;
-}
+//- (NSString *)createTimeFromSeconds:(double)seconds {
+//    double hours, minutes, extraSeconds;
+//    hours = seconds / 3600;
+//    minutes = fmod(seconds, 3600) / 60;
+//    extraSeconds = fmod(fmod(seconds, 3600), 60);
+//
+//    NSString *timeText = [NSString stringWithFormat:@"%02d:%02d:%02d", (int)hours, (int)minutes, (int)extraSeconds];
+//    [Utils createTimeFromSeconds:seconds withFormat:TimeFormat_iHour_iMin_iSec];
+//    return timeText;
+//}
 
 @end

@@ -8,6 +8,7 @@
 
 #import "StopwatchView.h"
 #import "CircleCell.h"
+#import "Utils.h"
 
 typedef enum: NSUInteger {
     StopwatchStateReady,
@@ -243,33 +244,35 @@ typedef enum: NSUInteger {
         
         double circleTime = currentTime - _lastCircleTime + _beforeStopCircleTime;
         
-        NSString *timeText = [self createTimeFromSeconds:totalSeconds];
+//        NSString *timeText = [self createTimeFromSeconds:totalSeconds];
+        NSString *timeText = [Utils createTimeFromSeconds:totalSeconds withFormat:TimeFormat_iMin_fSec];
         [self.watchTimeText setText:timeText];
         
-        NSString *circleTimeText = [self createTimeFromSeconds:circleTime];
+//        NSString *circleTimeText = [self createTimeFromSeconds:circleTime];
+        NSString *circleTimeText = [Utils createTimeFromSeconds:circleTime withFormat:TimeFormat_iMin_fSec];
         [self.circleTimeText setText:circleTimeText];
         
     }
 }
 
-- (NSString *)createTimeFromSeconds:(double)seconds {
-    double extraSeconds = fmod(seconds, 60.0);
-    int minutes = (int)seconds / 60;
-    
-    NSString *sec = [NSString stringWithFormat:@"%.2f", extraSeconds];
-    if (extraSeconds < 10) {
-        sec = [NSString stringWithFormat:@"0%.2f", extraSeconds];
-    }
-    
-    NSString *min = [NSString stringWithFormat:@"%i", minutes];
-    if (minutes < 10) {
-        min = [NSString stringWithFormat:@"0%i", minutes];
-    }
-    
-    NSString *timeText = [NSString stringWithFormat:@"%@:%@", min, sec];
-    
-    return timeText;
-}
+//- (NSString *)createTimeFromSeconds:(double)seconds {
+//    double extraSeconds = fmod(seconds, 60.0);
+//    int minutes = (int)seconds / 60;
+//    
+//    NSString *sec = [NSString stringWithFormat:@"%.2f", extraSeconds];
+//    if (extraSeconds < 10) {
+//        sec = [NSString stringWithFormat:@"0%.2f", extraSeconds];
+//    }
+//    
+//    NSString *min = [NSString stringWithFormat:@"%i", minutes];
+//    if (minutes < 10) {
+//        min = [NSString stringWithFormat:@"0%i", minutes];
+//    }
+//    
+//    NSString *timeText = [NSString stringWithFormat:@"%@:%@", min, sec];
+//    
+//    return timeText;
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
