@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF4EDE901DECCF2B00BBE020 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4EDE8F1DECCF2A00BBE020 /* Utils.m */; };
 		AF88D37D1DBFDE4600AC7BF3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF88D37C1DBFDE4600AC7BF3 /* main.m */; };
 		AF88D3801DBFDE4600AC7BF3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF88D37F1DBFDE4600AC7BF3 /* AppDelegate.m */; };
 		AF88D3831DBFDE4600AC7BF3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF88D3821DBFDE4600AC7BF3 /* ViewController.m */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF4EDE8E1DECCF2A00BBE020 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		AF4EDE8F1DECCF2A00BBE020 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		AF88D3781DBFDE4600AC7BF3 /* SegmentedControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SegmentedControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF88D37C1DBFDE4600AC7BF3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AF88D37E1DBFDE4600AC7BF3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -87,6 +90,8 @@
 				AFFE69CF1DD2755300C782B7 /* CircleCell.m */,
 				AFFC95931DD3B9A80039C71F /* CircleCell.xib */,
 				AF88D3841DBFDE4600AC7BF3 /* Main.storyboard */,
+				AF4EDE8E1DECCF2A00BBE020 /* Utils.h */,
+				AF4EDE8F1DECCF2A00BBE020 /* Utils.m */,
 				AF88D3871DBFDE4600AC7BF3 /* Assets.xcassets */,
 				AF88D3891DBFDE4600AC7BF3 /* LaunchScreen.storyboard */,
 				AF88D38C1DBFDE4600AC7BF3 /* Info.plist */,
@@ -181,6 +186,7 @@
 				AF88D3831DBFDE4600AC7BF3 /* ViewController.m in Sources */,
 				AF88D3801DBFDE4600AC7BF3 /* AppDelegate.m in Sources */,
 				AF88D3941DBFEF2A00AC7BF3 /* StopwatchView.m in Sources */,
+				AF4EDE901DECCF2B00BBE020 /* Utils.m in Sources */,
 				AF88D37D1DBFDE4600AC7BF3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
