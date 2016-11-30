@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 
 typedef enum: NSUInteger {
-    TimeFormat_iHour_iMin_iSec,
-    TimeFormat_iMin_fSec
+    TimeFormatForTimer,
+    TimeFormatForStopwatch,
+    TimeFormatForSomeElse
 } TimeFormat;
 
 @interface Utils : NSObject

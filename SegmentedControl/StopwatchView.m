@@ -245,11 +245,11 @@ typedef enum: NSUInteger {
         double circleTime = currentTime - _lastCircleTime + _beforeStopCircleTime;
         
 //        NSString *timeText = [self createTimeFromSeconds:totalSeconds];
-        NSString *timeText = [Utils createTimeFromSeconds:totalSeconds withFormat:TimeFormat_iMin_fSec];
+        NSString *timeText = [Utils createTimeFromSeconds:totalSeconds withFormat:TimeFormatForStopwatch];
         [self.watchTimeText setText:timeText];
         
 //        NSString *circleTimeText = [self createTimeFromSeconds:circleTime];
-        NSString *circleTimeText = [Utils createTimeFromSeconds:circleTime withFormat:TimeFormat_iMin_fSec];
+        NSString *circleTimeText = [Utils createTimeFromSeconds:circleTime withFormat:TimeFormatForStopwatch];
         [self.circleTimeText setText:circleTimeText];
         
     }

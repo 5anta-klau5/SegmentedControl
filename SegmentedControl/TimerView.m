@@ -101,7 +101,7 @@ typedef enum: NSUInteger {
             _secondsLeft = _countDownInterval;
 //            [self updateCountDown];
 //            self.selectedTime.text = [self createTimeFromSeconds:_secondsLeft];
-            self.selectedTime.text = [Utils createTimeFromSeconds:_secondsLeft withFormat:TimeFormat_iHour_iMin_iSec];
+            self.selectedTime.text = [Utils createTimeFromSeconds:_secondsLeft withFormat:TimeFormatForSomeElse];
             [self startTimer];
             self.myDatePicker.hidden = YES;
             self.selectedTime.hidden = NO;
@@ -141,22 +141,25 @@ typedef enum: NSUInteger {
 
 - (void)changeButtonsForState:(CountdownStateType)state {
     switch (state) {
-        case CountdownStateStart:
+        case CountdownStateStart: {
             [self.startPauseBtn setTitle:NSLocalizedString(@"Pause", nil) forState:UIControlStateNormal];
             [self.startPauseBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             
             self.cancelBtn.enabled = YES;
             [self.cancelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             break;
-        case CountdownStatePause:
+        }
+        case CountdownStatePause: {
             [self.startPauseBtn setTitle:NSLocalizedString(@"Resume", nil) forState:UIControlStateNormal];
             [self.startPauseBtn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
             break;
-        case CountdownStateResume:
+        }
+        case CountdownStateResume: {
             [self.startPauseBtn setTitle:NSLocalizedString(@"Pause", nil) forState:UIControlStateNormal];
             [self.startPauseBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             break;
-        case CountdownStateCancel:
+        }
+        case CountdownStateCancel: {
             [self.startPauseBtn setTitle:NSLocalizedString(@"Start", nil) forState:UIControlStateNormal];
             [self.startPauseBtn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
             
@@ -166,6 +169,7 @@ typedef enum: NSUInteger {
                                                                alpha:1.0] forState:UIControlStateNormal];
             self.cancelBtn.enabled = NO;
             break;
+        }
         default:
             break;
     }
@@ -193,7 +197,7 @@ typedef enum: NSUInteger {
     _secondsLeft --;
 //        NSLog(@"seconds left: %f", _secondsLeft);
 //        self.selectedTime.text = [self createTimeFromSeconds:_secondsLeft];
-    self.selectedTime.text = [Utils createTimeFromSeconds:_secondsLeft withFormat:TimeFormat_iHour_iMin_iSec];
+    self.selectedTime.text = [Utils createTimeFromSeconds:_secondsLeft withFormat:TimeFormatForSomeElse];
     if (_secondsLeft == 0) {
         [self setCountDownState:CountdownStateCancel];
         NSLog(@"time is up");
