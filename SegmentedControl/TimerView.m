@@ -21,9 +21,7 @@ typedef enum: NSUInteger {
 } CountdownStateType;
 
 @interface TimerView() {
-//    int _remainder;
     double _secondsLeft;
-//    double _elapsedTime;
     NSTimeInterval _countDownInterval;
     NSTimer *_myTimer;
     NSDate *_lastFireDateOfTimer;
@@ -47,22 +45,14 @@ typedef enum: NSUInteger {
     [super awakeFromNib];
     
     _currentCountdownState = CountdownStateReady;
-//    _elapsedTime = 0;
     
-//    self.myDatePicker.countDownDuration = 120.0f;
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.myDatePicker.countDownDuration = 120.0f ;
+        self.myDatePicker.countDownDuration = 60.0f ;
     });
 }
 
 - (IBAction)datePickerChanged:(UIDatePicker *)datePicker {
-    NSLog(@"datePicker changed");
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    dateFormatter.timeStyle = NSDateFormatterMediumStyle;
-//    dateFormatter.dateFormat = @"HH:mm:ss";
-//    
-//    NSString *strDate = [dateFormatter stringFromDate:datePicker.date];
-//    self.selectedTime.text = strDate;
+//    NSLog(@"datePicker changed");
 }
 
 - (IBAction)pushedStartPauseBtn:(UIButton *)sender {
@@ -95,31 +85,24 @@ typedef enum: NSUInteger {
         case CountdownStateStart: {
             _currentCountdownState = CountdownStateStarted;
             _countDownInterval = (NSTimeInterval)_myDatePicker.countDownDuration;
-//            _remainder = _countDownInterval;
-//            _secondsLeft = _countDownInterval - _remainder%60 - _elapsedTime;
-//            NSLog(@"interval: %f, rem: %i, remainder: %i", _countDownInterval, _remainder, _remainder%60);
             _secondsLeft = _countDownInterval;
-//            [self updateCountDown];
-//            self.selectedTime.text = [self createTimeFromSeconds:_secondsLeft];
-            self.selectedTime.text = [Utils createTimeFromSeconds:_secondsLeft withFormat:TimeFormatForSomeElse];
+            self.selectedTime.text = [Utils createTimeFromSeconds:_secondsLeft withFormat:TimeFormatForTimer];
             [self startTimer];
             self.myDatePicker.hidden = YES;
             self.selectedTime.hidden = NO;
+            self.alertMsg.text = @"";
             break;
         }
         case CountdownStatePause: {
             _currentCountdownState = CountdownStatePaused;
             _lastFireDateOfTimer = [_myTimer fireDate];
             _pauseStartDate = [NSDate date];
-            float diff = [_lastFireDateOfTimer timeIntervalSinceDate:_pauseStartDate];
-            NSLog(@"difference: %f", diff);
-//            [self stopTimer];
+
             [_myTimer setFireDate:[NSDate distantFuture]];
             break;
         }
         case CountdownStateResume: {
             _currentCountdownState = CountdownStateResumed;
-//            [self startTimer];
             NSDate *resumeDate = [NSDate date];
             float pauseTime = [resumeDate timeIntervalSinceDate:_pauseStartDate];
             NSDate *nextFireDateOfTimer = [NSDate dateWithTimeInterval:pauseTime sinceDate:_lastFireDateOfTimer];
@@ -128,7 +111,6 @@ typedef enum: NSUInteger {
         }
         case CountdownStateCancel: {
             [self stopTimer];
-//            _elapsedTime = 0;
             self.selectedTime.hidden = YES;
             self.myDatePicker.hidden = NO;
             _currentCountdownState = CountdownStateReady;
@@ -193,26 +175,13 @@ typedef enum: NSUInteger {
 }
 
 - (void)updateCountDown {
-//    _elapsedTime++;
     _secondsLeft --;
-//        NSLog(@"seconds left: %f", _secondsLeft);
-//        self.selectedTime.text = [self createTimeFromSeconds:_secondsLeft];
-    self.selectedTime.text = [Utils createTimeFromSeconds:_secondsLeft withFormat:TimeFormatForSomeElse];
+
+    self.selectedTime.text = [Utils createTimeFromSeconds:_secondsLeft withFormat:TimeFormatForTimer];
     if (_secondsLeft == 0) {
+        self.alertMsg.text = NSLocalizedString(@"Time is UP!", nil);
         [self setCountDownState:CountdownStateCancel];
-        NSLog(@"time is up");
     }
 }
-
-//- (NSString *)createTimeFromSeconds:(double)seconds {
-//    double hours, minutes, extraSeconds;
-//    hours = seconds / 3600;
-//    minutes = fmod(seconds, 3600) / 60;
-//    extraSeconds = fmod(fmod(seconds, 3600), 60);
-//
-//    NSString *timeText = [NSString stringWithFormat:@"%02d:%02d:%02d", (int)hours, (int)minutes, (int)extraSeconds];
-//    [Utils createTimeFromSeconds:seconds withFormat:TimeFormat_iHour_iMin_iSec];
-//    return timeText;
-//}
 
 @end

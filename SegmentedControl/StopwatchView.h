@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StopwatchView : UIView <UITableViewDelegate, UITableViewDataSource>{
-//    NSTimer *myTimer;
-}
+@interface StopwatchView : UIView <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSTimer *myTimer;
 @property (weak, nonatomic) IBOutlet UILabel *watchTimeText;

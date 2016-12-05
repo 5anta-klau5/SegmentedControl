@@ -52,9 +52,17 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2yb-AF-Ows">
+                    <rect key="frame" x="111" y="497" width="152" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="alertMsg" destination="2yb-AF-Ows" id="TPJ-m8-l2F"/>
                 <outlet property="cancelBtn" destination="d24-a9-3Ad" id="YDe-ma-nmX"/>
                 <outlet property="myDatePicker" destination="v1C-Fe-rqz" id="EzC-pI-0GE"/>
                 <outlet property="selectedTime" destination="8OU-5n-r7M" id="gAE-Ay-2ez"/>
