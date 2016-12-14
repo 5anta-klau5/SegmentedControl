@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF21B7E21DFDCF0E008C584E /* GalleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF21B7E11DFDCF0E008C584E /* GalleryView.m */; };
+		AF21B7E61DFDCFB0008C584E /* GalleryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF21B7E51DFDCFB0008C584E /* GalleryView.xib */; };
+		AF21B7EA1DFDF14B008C584E /* GalleryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF21B7E81DFDF14B008C584E /* GalleryViewCell.m */; };
+		AF21B7EB1DFDF14B008C584E /* GalleryViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF21B7E91DFDF14B008C584E /* GalleryViewCell.xib */; };
 		AF4EDE901DECCF2B00BBE020 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4EDE8F1DECCF2A00BBE020 /* Utils.m */; };
 		AF88D37D1DBFDE4600AC7BF3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF88D37C1DBFDE4600AC7BF3 /* main.m */; };
 		AF88D3801DBFDE4600AC7BF3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF88D37F1DBFDE4600AC7BF3 /* AppDelegate.m */; };
@@ -23,6 +27,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF21B7E01DFDCF0E008C584E /* GalleryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryView.h; sourceTree = "<group>"; };
+		AF21B7E11DFDCF0E008C584E /* GalleryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryView.m; sourceTree = "<group>"; };
+		AF21B7E51DFDCFB0008C584E /* GalleryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryView.xib; sourceTree = "<group>"; };
+		AF21B7E71DFDF14B008C584E /* GalleryViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryViewCell.h; sourceTree = "<group>"; };
+		AF21B7E81DFDF14B008C584E /* GalleryViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryViewCell.m; sourceTree = "<group>"; };
+		AF21B7E91DFDF14B008C584E /* GalleryViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryViewCell.xib; sourceTree = "<group>"; };
 		AF4EDE8E1DECCF2A00BBE020 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		AF4EDE8F1DECCF2A00BBE020 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		AF88D3781DBFDE4600AC7BF3 /* SegmentedControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SegmentedControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +99,12 @@
 				AFFE69CE1DD2755300C782B7 /* CircleCell.h */,
 				AFFE69CF1DD2755300C782B7 /* CircleCell.m */,
 				AFFC95931DD3B9A80039C71F /* CircleCell.xib */,
+				AF21B7E01DFDCF0E008C584E /* GalleryView.h */,
+				AF21B7E11DFDCF0E008C584E /* GalleryView.m */,
+				AF21B7E51DFDCFB0008C584E /* GalleryView.xib */,
+				AF21B7E71DFDF14B008C584E /* GalleryViewCell.h */,
+				AF21B7E81DFDF14B008C584E /* GalleryViewCell.m */,
+				AF21B7E91DFDF14B008C584E /* GalleryViewCell.xib */,
 				AF88D3841DBFDE4600AC7BF3 /* Main.storyboard */,
 				AF4EDE8E1DECCF2A00BBE020 /* Utils.h */,
 				AF4EDE8F1DECCF2A00BBE020 /* Utils.m */,
@@ -168,9 +184,11 @@
 				AF88D38B1DBFDE4600AC7BF3 /* LaunchScreen.storyboard in Resources */,
 				AF88D3881DBFDE4600AC7BF3 /* Assets.xcassets in Resources */,
 				AFFC95941DD3B9A80039C71F /* CircleCell.xib in Resources */,
+				AF21B7E61DFDCFB0008C584E /* GalleryView.xib in Resources */,
 				AF88D3981DBFF99400AC7BF3 /* StopwatchView.xib in Resources */,
 				AFF8736A1DDBAFDF004C6E74 /* TimerView.xib in Resources */,
 				AF88D3861DBFDE4600AC7BF3 /* Main.storyboard in Resources */,
+				AF21B7EB1DFDF14B008C584E /* GalleryViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +202,8 @@
 				AFF873681DDBAF9F004C6E74 /* TimerView.m in Sources */,
 				AFFE69D01DD2755300C782B7 /* CircleCell.m in Sources */,
 				AF88D3831DBFDE4600AC7BF3 /* ViewController.m in Sources */,
+				AF21B7E21DFDCF0E008C584E /* GalleryView.m in Sources */,
+				AF21B7EA1DFDF14B008C584E /* GalleryViewCell.m in Sources */,
 				AF88D3801DBFDE4600AC7BF3 /* AppDelegate.m in Sources */,
 				AF88D3941DBFEF2A00AC7BF3 /* StopwatchView.m in Sources */,
 				AF4EDE901DECCF2B00BBE020 /* Utils.m in Sources */,

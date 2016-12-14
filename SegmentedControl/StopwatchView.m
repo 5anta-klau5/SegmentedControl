@@ -209,11 +209,12 @@ typedef enum: NSUInteger {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     long itemsCount = [circleList count];
     long currentRow = indexPath.row;
+    NSString *cellIdentifier = @"circleTimeCell";
     
-    CircleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"circleTimeCell"];
+    CircleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
-        [tableView registerNib:[UINib nibWithNibName:@"CircleCell" bundle:nil] forCellReuseIdentifier:@"circleTimeCell"];
-        cell = [tableView dequeueReusableCellWithIdentifier:@"circleTimeCell"];
+        [tableView registerNib:[UINib nibWithNibName:@"CircleCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     }
     cell.backgroundColor = [UIColor colorWithRed:102/255.0 green:204/255.0 blue:255/255.0 alpha:1.0];
     cell.circleTimeTxt.text = [circleList objectAtIndex:itemsCount - currentRow - 1];
