@@ -78,9 +78,9 @@ typedef enum: NSUInteger {
 - (void)setCountDownState:(CountdownStateType)state {
     [self changeButtonsForState:state];
     
+    _currentCountdownState = state;
     switch (state) {
         case CountdownStateStart: {
-            _currentCountdownState = state;
             _countDownInterval = (NSTimeInterval)_myDatePicker.countDownDuration;
             _secondsLeft = _countDownInterval;
             self.selectedTime.text = [Utils createTimeFromSeconds:_secondsLeft withFormat:TimeFormatForTimer];
@@ -91,7 +91,6 @@ typedef enum: NSUInteger {
             break;
         }
         case CountdownStatePause: {
-            _currentCountdownState = state;
             _lastFireDateOfTimer = [_myTimer fireDate];
             _pauseStartDate = [NSDate date];
 
@@ -99,7 +98,6 @@ typedef enum: NSUInteger {
             break;
         }
         case CountdownStateResume: {
-            _currentCountdownState = state;
             NSDate *resumeDate = [NSDate date];
             float pauseTime = [resumeDate timeIntervalSinceDate:_pauseStartDate];
             [_myTimer setFireDate:[NSDate dateWithTimeInterval:pauseTime sinceDate:_lastFireDateOfTimer]];
@@ -118,43 +116,40 @@ typedef enum: NSUInteger {
 }
 
 - (void)changeButtonsForState:(CountdownStateType)state {
-    UIColor *color;
+    UIColor *startPauseBtnColor;
+    NSString *startPauseButtonTitle;
     switch (state) {
         case CountdownStateStart: {
-            color = [UIColor redColor];
-            [self.startPauseBtn setTitle:NSLocalizedString(@"Pause", nil) forState:UIControlStateNormal];
-            [self.startPauseBtn setTitleColor:color forState:UIControlStateNormal];
+            startPauseBtnColor = [UIColor redColor];
+            startPauseButtonTitle = NSLocalizedString(@"Pause", nil);
             
-            color = [UIColor blackColor];
+            [self.cancelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             self.cancelBtn.enabled = YES;
-            [self.cancelBtn setTitleColor:color forState:UIControlStateNormal];
             break;
         }
         case CountdownStatePause: {
-            color = [UIColor greenColor];
-            [self.startPauseBtn setTitle:NSLocalizedString(@"Resume", nil) forState:UIControlStateNormal];
-            [self.startPauseBtn setTitleColor:color forState:UIControlStateNormal];
+            startPauseBtnColor = [UIColor greenColor];
+            startPauseButtonTitle = NSLocalizedString(@"Resume", nil);
             break;
         }
         case CountdownStateResume: {
-            color = [UIColor redColor];
-            [self.startPauseBtn setTitle:NSLocalizedString(@"Pause", nil) forState:UIControlStateNormal];
-            [self.startPauseBtn setTitleColor:color forState:UIControlStateNormal];
+            startPauseBtnColor = [UIColor redColor];
+            startPauseButtonTitle = NSLocalizedString(@"Pause", nil);
             break;
         }
         case CountdownStateCancel: {
-            color = [UIColor greenColor];
-            [self.startPauseBtn setTitle:NSLocalizedString(@"Start", nil) forState:UIControlStateNormal];
-            [self.startPauseBtn setTitleColor:color forState:UIControlStateNormal];
+            startPauseBtnColor = [UIColor greenColor];
+            startPauseButtonTitle = NSLocalizedString(@"Start", nil);
             
-            color = [UIColor colorWithRed:85/255.0 green:85/255.0 blue:85/255.0 alpha:1.0];
-            [self.cancelBtn setTitleColor:color forState:UIControlStateNormal];
+            [self.cancelBtn setTitleColor:[UIColor colorWithRed:85/255.0 green:85/255.0 blue:85/255.0 alpha:1.0] forState:UIControlStateNormal];
             self.cancelBtn.enabled = NO;
             break;
         }
         default:
             break;
     }
+    [self.startPauseBtn setTitle:startPauseButtonTitle forState:UIControlStateNormal];
+    [self.startPauseBtn setTitleColor:startPauseBtnColor forState:UIControlStateNormal];
 }
 
 - (void)startTimer {
